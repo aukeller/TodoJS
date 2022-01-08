@@ -10,13 +10,33 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/DOMmethods.js":
+/*!***************************!*\
+  !*** ./src/DOMmethods.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((function DOMModule() {\n    \n    const projectContainer = document.createElement('div');\n    \n    const displayProjects = (projectTitles) => {\n        projectTitles.forEach(projectTitle => {\n            let projectDiv = document.createElement('div');\n            projectDiv.textContent = projectTitle;\n\n            projectContainer.appendChild(projectDiv);\n            document.body.appendChild(projectContainer);\n        });\n    };\n\n    return { displayProjects };\n})());\n\n//# sourceURL=webpack://todojs/./src/DOMmethods.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todos__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todos */ \"./src/todos.js\");\n\n\nconst newTodo = (0,_todos__WEBPACK_IMPORTED_MODULE_0__.Todo)('hello', \"world\", \"1/8/21\", \"high\");\nconsole.log(newTodo.getTitle());\n\n//# sourceURL=webpack://todojs/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _todos__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todos */ \"./src/todos.js\");\n/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ \"./src/project.js\");\n/* harmony import */ var _DOMmethods__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DOMmethods */ \"./src/DOMmethods.js\");\n\n\n\n\nconst newTodo = (0,_todos__WEBPACK_IMPORTED_MODULE_0__.Todo)('hello', \"world\", \"1/8/21\", \"high\");\n\nconst newProject = (0,_project__WEBPACK_IMPORTED_MODULE_1__.Project)(\"new project\");\n\nnewProject.addTodo(newTodo);\n\n_DOMmethods__WEBPACK_IMPORTED_MODULE_2__[\"default\"].displayProjects([newProject.getTitle()])\n\n//# sourceURL=webpack://todojs/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/project.js":
+/*!************************!*\
+  !*** ./src/project.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Project\": () => (/* binding */ Project)\n/* harmony export */ });\nconst Project = (title) => {\n    const todos = [];\n\n    const getTitle = () => title;\n\n    const addTodo = (todo) => {\n        todos.push(todo);\n    };\n\n    \n\n    return { addTodo, getTitle };\n};\n\n\n\n//# sourceURL=webpack://todojs/./src/project.js?");
 
 /***/ }),
 
@@ -26,7 +46,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tod
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Todo\": () => (/* binding */ Todo)\n/* harmony export */ });\n// Your ‘todos’ are going to be objects that you’ll want to dynamically create, \n// which means either using factories or constructors/classes to generate them.\n// Brainstorm what kind of properties your todo-items are going to have. At a \n// minimum they should have a title, description, dueDate and priority. \n// You might also want to include notes or even a checklist.\n\n\nconst Todo = (title, description, dueDate, priority) => {\n    \n    const getTitle = () => title;\n    \n    \n    return {\n        getTitle\n    };\n}\n\n\n\n//# sourceURL=webpack://todojs/./src/todos.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"Todo\": () => (/* binding */ Todo)\n/* harmony export */ });\n// Your ‘todos’ are going to be objects that you’ll want to dynamically create, \n// which means either using factories or constructors/classes to generate them.\n// Brainstorm what kind of properties your todo-items are going to have. At a \n// minimum they should have a title, description, dueDate and priority. \n// You might also want to include notes or even a checklist.\n\n\nconst Todo = (title, description, dueDate, priority) => {\n    \n    let notes;\n    \n    const getTitle = () => title;\n    \n    const addNote = (note) => {\n        if (typeof note === 'string') {\n            notes = note;\n        }\n    };\n    \n    return {\n        getTitle, \n        addNote,\n    };\n}\n\n\n\n//# sourceURL=webpack://todojs/./src/todos.js?");
 
 /***/ })
 

@@ -3,13 +3,14 @@ const Project = (title) => {
 
     const getTitle = () => title;
 
-    const addTodo = (todo) => {
-        todos.push(todo);
-    };
+    const getTodos = () => todos;
+    
+    const addTodo = (todo) => todos.push(todo);
+
 
     
 
-    return { addTodo, getTitle };
+    return { addTodo, getTitle, getTodos };
 };
 
 export { Project }

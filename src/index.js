@@ -2,10 +2,19 @@ import { Todo } from "./todos";
 import { Project } from "./project";
 import DOMModule from "./DOMmethods";
 
-const newTodo = Todo('hello', "world", "1/8/21", "high");
+const main = () => {
+    const projects = [];
 
-const newProject = Project("new project");
+    const addProject = document.querySelector('#add');
+    addProject.addEventListener('click', () => {
+        let newProjectTitle = DOMModule.getNewProjectTitle();
+        projects.push(Project(newProjectTitle));
 
-newProject.addTodo(newTodo);
+    });
 
-DOMModule.displayProjects([newProject.getTitle()])
+   let newProject = DOMModule.getNewProjectTitle();
+   
+   return { newProject };
+};
+
+let test = main();

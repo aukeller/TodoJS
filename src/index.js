@@ -5,16 +5,20 @@ import DOMModule from "./DOMmethods";
 const main = () => {
     const projects = [];
 
-    const addProject = document.querySelector('#add');
-    addProject.addEventListener('click', () => {
-        let newProjectTitle = DOMModule.getNewProjectTitle();
-        projects.push(Project(newProjectTitle));
+    const newProjectBtn = document.querySelector('#new-project');
 
+    newProjectBtn.addEventListener('click', () => {
+        const addProjectBtn = document.querySelector('#add');
+
+        addProjectBtn.addEventListener('click', () => {
+            let newProjectTitle = DOMModule.getNewProjectTitle();
+            projects.push(Project(newProjectTitle));
+    
+        });
     });
+    
 
-   let newProject = DOMModule.getNewProjectTitle();
-   
-   return { newProject };
 };
 
-let test = main();
+main();
+

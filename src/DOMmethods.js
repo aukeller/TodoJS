@@ -1,32 +1,40 @@
 export default (function DOMModule() {
     
-    const projectContainer = document.createElement('div');
-
-    const newProject = document.querySelector('#new-project');
+    
+    const newProjectBtn = document.querySelector('#new-project');
     const projectTitleInput = document.querySelector('#project-title');
+    const projectForm = document.querySelector('#project-form');
 
+    const updateProjectDisplay = (title) => {
+        const projectContainer = document.querySelector('#project-container');
 
-    const displayProjects = (projectTitles) => {
-        projectTitles.forEach(projectTitle => {
-            let projectDiv = document.createElement('div');
-            projectDiv.textContent = projectTitle;
+        const projectDIV = document.createElement('div');
+        projectDIV.textContent = title;
 
-            projectContainer.appendChild(projectDiv);
-            document.body.appendChild(projectContainer);
-        });
+        projectContainer.appendChild(projectDIV);
     };
 
-    const displayNewProjectForm = () => {
-        const projectForm = document.querySelector('#project-form');
-        projectForm.hidden = false;
+    const displayNewProjectForm = () => projectForm.hidden = false;
+    const hideProjectForm = () => {
+        projectForm.hidden = true
+        projectTitleInput.value = "";
     };
 
     const getNewProjectTitle = () => projectTitleInput.value;
 
 
-    newProject.addEventListener('click', displayNewProjectForm);
+    newProjectBtn.addEventListener('click', () => {
+        displayNewProjectForm();
+
+        const addProjectBtn = document.querySelector('#add');
+        addProjectBtn.addEventListener('click', () => {
+            updateProjectDisplay(getNewProjectTitle());
+            hideProjectForm();
+        });
+    });
+    
 
 
 
-    return { displayProjects, getNewProjectTitle};
+    return { getNewProjectTitle};
 })();

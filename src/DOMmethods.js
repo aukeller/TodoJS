@@ -1,18 +1,36 @@
 export default (function DOMModule() {
-    
-    
+  
     const newProjectBtn = document.querySelector('#new-project');
-    const projectTitleInput = document.querySelector('#project-title');
     const projectForm = document.querySelector('#project-form');
+    const projectTitleInput = document.querySelector('#project-title');
 
-    const updateProjectDisplay = (title) => {
+    
+    const createBasicTodoDiv = (todoTitle, todoDueDate) => {
+        let todoDIV = document.createElement('div');
+
+        let title = document.createElement('span');
+        let dueDate = document.createElement('span');
+
+        title.textContent = todoTitle;
+        dueDate.textContent = todoDueDate;
+
+        todoDIV.append(title, dueDate);
+
+        return todoDIV;
+    }
+    
+    
+    const updateProjectDisplay = (title, id) => {
         const projectContainer = document.querySelector('#project-container');
 
         const projectDIV = document.createElement('div');
         projectDIV.textContent = title;
+        projectDIV.classList.add('project');
+        projectDIV.id = id;
 
         projectContainer.appendChild(projectDIV);
     };
+
 
     const displayNewProjectForm = () => projectForm.hidden = false;
     const hideProjectForm = () => {
@@ -21,20 +39,16 @@ export default (function DOMModule() {
     };
 
     const getNewProjectTitle = () => projectTitleInput.value;
-
+    const getAddProjectButton = () => document.querySelector('#add');
+    const getProject = (index) => document.querySelector(`#project-${index}`)
+    
 
     newProjectBtn.addEventListener('click', () => {
         displayNewProjectForm();
-
-        const addProjectBtn = document.querySelector('#add');
-        addProjectBtn.addEventListener('click', () => {
-            updateProjectDisplay(getNewProjectTitle());
-            hideProjectForm();
-        });
     });
     
 
 
 
-    return { getNewProjectTitle};
+    return {getNewProjectTitle, updateProjectDisplay, hideProjectForm, getAddProjectButton, getProject};
 })();

@@ -1,4 +1,4 @@
-export default (function DOMModule() {
+export default (function DOMProjectModule() {
   
     const newProjectBtn = document.querySelector('#new-project');
     const projectForm = document.querySelector('#project-form');
@@ -50,5 +50,10 @@ export default (function DOMModule() {
 
 
 
-    return {getNewProjectTitle, updateProjectDisplay, hideProjectForm, getAddProjectButton, getProject};
+    return {getNewProjectTitle, 
+            updateProjectDisplay, 
+            hideProjectForm, 
+            getAddProjectButton, 
+            getProject
+        };
 })();

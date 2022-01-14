@@ -1,6 +1,6 @@
 import { Todo } from "./todos";
 import { Project } from "./project";
-import DOMModule from "./DOMmethods";
+import DOMProjectModule from "./DOMProjectModule";
 
 const main = () => {
     const firstProject = Project('First Project');
@@ -12,34 +12,44 @@ const main = () => {
 
 
     function readyForm() {
-        const addProjectBtn = DOMModule.getAddProjectButton();
+        const addProjectBtn = DOMProjectModule.getAddProjectButton();
 
         addProjectBtn.addEventListener('click', createNewProject);
             
     };
 
     function createNewProject() {
-        let newProjectTitle = DOMModule.getNewProjectTitle();
+        let newProjectTitle = DOMProjectModule.getNewProjectTitle();
 
         projects.push(Project(newProjectTitle));
         
-        DOMModule.updateProjectDisplay(newProjectTitle, `project-${projects.length - 1}`);
-        DOMModule.hideProjectForm();
+        DOMProjectModule.updateProjectDisplay(newProjectTitle, `project-${projects.length - 1}`);
+        DOMProjectModule.hideProjectForm();
             
 
         addProjectListener(projects.length - 1);
     }
 
     function addProjectListener(projectIndex) {
-        let newProject = DOMModule.getProject(projectIndex);
-        newProject.addEventListener('click', (e) => showTodos(e.target.id));
+        let newProject = DOMProjectModule.getProject(projectIndex);
+        newProject.addEventListener('click', (e) => selectProject(e.target.id));
     }
 
-    function showTodos(projectId) {
+    function selectProject (projectId) {
         let splitId = projectId.split('-')[1];
-        
+
         const project = projects[splitId];
-        console.log(project.getTodos());
+
+
+        showTodos(project.getTodos());
+        focusedProject = project;
+
+        console.log(focusedProject);
+    }
+
+    function showTodos(todos) {
+        todos.forEach(todo => {
+        })
     }
 
 
@@ -49,7 +59,7 @@ const main = () => {
     
 
     // For first project only, proceeding projects update DOM automatically from DOM module
-    projects.forEach(project => DOMModule.updateProjectDisplay(project.getTitle(), "project-0")); 
+    projects.forEach(project => DOMProjectModule.updateProjectDisplay(project.getTitle(), "project-0")); 
 
 };
 

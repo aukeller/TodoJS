@@ -1,7 +1,9 @@
 import { Todo } from "./todos";
 import { Project } from "./project";
-import DOMProjectModule from "./DOMProjectModule";
-import DOMTodoModule from "./DOMTodoModule";
+import DOMProjectModule from "./DOMModules/DOMProjectModule";
+import DOMTodoModule from "./DOMModules/DOMTodoModule";
+
+import style from './style.css';
 
 const main = () => {
     

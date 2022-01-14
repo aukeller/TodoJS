@@ -3,22 +3,6 @@ export default (function DOMProjectModule() {
     const newProjectBtn = document.querySelector('#new-project');
     const projectForm = document.querySelector('#project-form');
     const projectTitleInput = document.querySelector('#project-title');
-
-    
-    const createBasicTodoDiv = (todoTitle, todoDueDate) => {
-        let todoDIV = document.createElement('div');
-
-        let title = document.createElement('span');
-        let dueDate = document.createElement('span');
-
-        title.textContent = todoTitle;
-        dueDate.textContent = todoDueDate;
-
-        todoDIV.append(title, dueDate);
-
-        return todoDIV;
-    }
-    
     
     const updateProjectDisplay = (title, id) => {
         const projectContainer = document.querySelector('#project-container');
@@ -47,9 +31,6 @@ export default (function DOMProjectModule() {
         displayNewProjectForm();
     });
     
-
-
-
     return {getNewProjectTitle, 
             updateProjectDisplay, 
             hideProjectForm, 

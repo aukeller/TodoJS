@@ -14,6 +14,7 @@ const Todo = (title, description, dueDate, priority) => {
     return {
         getTitle, 
         addNote,
+        getDueDate
     };
 }
 

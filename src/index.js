@@ -1,10 +1,13 @@
 import { Todo } from "./todos";
 import { Project } from "./project";
 import DOMProjectModule from "./DOMProjectModule";
+import DOMTodoModule from "./DOMTodoModule";
 
 const main = () => {
-    const firstProject = Project('First Project');
-    firstProject.addTodo(Todo('first todo', 'this is my first todo', '1/11/22', 'high'));
+    
+    let firstProject = Project('First Project');
+    let firstTodo = Todo('title', 'first todo', "1/13/22", 'high');
+    firstProject.addTodo(firstTodo);
 
     const projects = [firstProject];
 
@@ -43,13 +46,14 @@ const main = () => {
 
         showTodos(project.getTodos());
         focusedProject = project;
-
-        console.log(focusedProject);
     }
 
     function showTodos(todos) {
         todos.forEach(todo => {
-        })
+            let todoDiv = DOMTodoModule.createBasicTodoDiv(todo.getTitle(), todo.getDueDate());
+            DOMTodoModule.updateDisplay(todoDiv);
+
+        });
     }
 
 
@@ -58,8 +62,12 @@ const main = () => {
     newProjectBtn.addEventListener('click', readyForm);
     
 
-    // For first project only, proceeding projects update DOM automatically from DOM module
-    projects.forEach(project => DOMProjectModule.updateProjectDisplay(project.getTitle(), "project-0")); 
+
+
+
+    
+    DOMProjectModule.updateProjectDisplay(firstProject.getTitle(), `project-${projects.length - 1}`);
+    addProjectListener(projects.length - 1);
 
 };
 

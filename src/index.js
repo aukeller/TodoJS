@@ -51,6 +51,8 @@ const main = () => {
     }
 
     function showTodos(todos) {
+        DOMTodoModule.clearDisplay();
+
         todos.forEach(todo => {
             let todoDiv = DOMTodoModule.createBasicTodoDiv(todo.getTitle(), todo.getDueDate());
             DOMTodoModule.updateDisplay(todoDiv);
@@ -59,15 +61,10 @@ const main = () => {
     }
 
 
-
     const newProjectBtn = document.querySelector('#new-project');
     newProjectBtn.addEventListener('click', readyForm);
     
 
-
-
-
-    
     DOMProjectModule.updateProjectDisplay(firstProject.getTitle(), `project-${projects.length - 1}`);
     addProjectListener(projects.length - 1);
 

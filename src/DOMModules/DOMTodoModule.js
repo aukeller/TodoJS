@@ -1,5 +1,8 @@
 export default (function DOMTodoModule() {
 
+    const todosContainer = document.querySelector('#todos-container');
+
+    
     const createBasicTodoDiv = (todoTitle, todoDueDate) => {
         let todoDIV = document.createElement('div');
 
@@ -14,14 +17,14 @@ export default (function DOMTodoModule() {
         return todoDIV;
     };
 
-    const updateDisplay = (todoDiv) => {
-        let todosContainer = document.querySelector('#todos-container');
-        todosContainer.appendChild(todoDiv);
-    }
+    const updateDisplay = (todoDiv) => todosContainer.appendChild(todoDiv);
+
+    const clearDisplay = () => todosContainer.innerHTML = "";
 
     return {
         createBasicTodoDiv,
-        updateDisplay
+        updateDisplay,
+        clearDisplay
     };
 
 })();

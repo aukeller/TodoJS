@@ -16,12 +16,17 @@ const main = () => {
     let focusedProject = projects[0]; // project currently selected
 
 
-    function readyForm() {
+    function readyProjectForm() {
         const addProjectBtn = DOMProjectModule.getAddProjectButton();
-
+        
         addProjectBtn.addEventListener('click', createNewProject);
-            
+        
     };
+    
+    function readyTodoForm() {
+        const addTodoBtn = DOMTodoModule.getAddTodoBtn();
+        addTodoBtn.addEventListener('click', createNewTodo);
+    }
 
     function createNewProject() {
         let newProjectTitle = DOMProjectModule.getNewProjectTitle();
@@ -33,6 +38,11 @@ const main = () => {
             
 
         addProjectListener(projects.length - 1);
+    }
+
+    function createNewTodo() {
+        DOMTodoModule.hideTodoForm();
+
     }
 
     function addProjectListener(projectIndex) {
@@ -62,7 +72,10 @@ const main = () => {
 
 
     const newProjectBtn = document.querySelector('#new-project');
-    newProjectBtn.addEventListener('click', readyForm);
+    newProjectBtn.addEventListener('click', readyProjectForm);
+    
+    const newTodoBtn = document.querySelector('#new-todo');
+    newTodoBtn.addEventListener('click', readyTodoForm);
     
 
     DOMProjectModule.updateProjectDisplay(firstProject.getTitle(), `project-${projects.length - 1}`);

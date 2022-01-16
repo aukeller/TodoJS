@@ -8,12 +8,12 @@ body {
     display: flex;
 }
 
-#project-container, #todos-container {
+#project-container, #main-todos-container {
     height: 100%;
     border: 1px solid black;
 }
 
-#todos-container {
+#main-todos-container {
     flex: 2;
 }
 

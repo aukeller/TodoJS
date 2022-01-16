@@ -41,6 +41,12 @@ const main = () => {
     }
 
     function createNewTodo() {
+        const formValues = DOMTodoModule.getTodoFormValues();
+        const newTodo = Todo(formValues.title, formValues.description, formValues.dueDate, formValues.priority);
+        
+        focusedProject.addTodo(newTodo);
+
+        showTodos(focusedProject.getTodos());
         DOMTodoModule.hideTodoForm();
 
     }

@@ -5,8 +5,6 @@
     <title>Todo List</title>
 </head>
 <body>
-    
-    
     <div class="container">
         <div id="project-container">
             <button id="new-project">New Project</button>
@@ -19,8 +17,36 @@
                 <button type="button" id="add">Add Project</button>
             </form>
         </div>
-        <div id="todos-container">
-    </div>
+        <div id="main-todos-container">
+            <button id="new-todo">New Todo</button>
+            <form id="todo-form" hidden> 
+                <label for="todo-title">
+                    Title
+                    <input id="todo-title" name="todo-title">
+                </label>
+                <label for="description">
+                    Description
+                    <textarea id="description" name="description"></textarea>
+                </label>
+                <label for="due-date">
+                    Due Date
+                    <input type="date" id="due-date" name="due-date">
+                </label>
+                <label for="priority">
+                    Priority
+                    <select id="priority" name="priority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </label>
+        
+                <button type="button" id="add-todo">Add Todo</button>
+            </form>
+            <div id="todos-container">
+            </div>
+        </div>
+
 
     </div>
 

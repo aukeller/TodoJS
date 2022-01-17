@@ -46,7 +46,7 @@ const main = () => {
         
         focusedProject.addTodo(newTodo);
 
-        showTodos(focusedProject.getTodos());
+        showTodos(focusedProject);
         DOMTodoModule.hideTodoForm();
 
     }
@@ -62,15 +62,17 @@ const main = () => {
         const project = projects[splitId];
 
 
-        showTodos(project.getTodos());
+        showTodos(project);
         focusedProject = project;
     }
 
-    function showTodos(todos) {
+    function showTodos(project) {
         DOMTodoModule.clearDisplay();
 
-        todos.forEach(todo => {
-            let todoDiv = DOMTodoModule.createBasicTodoDiv(todo.getTitle(), todo.getDueDate());
+        const todos = project.getTodos();
+
+        todos.forEach((todo) => {
+            let todoDiv = DOMTodoModule.createBasicTodoDiv(todo.getTitle(), todo.getDueDate(), todo.getDescription(), todo.getPriority());            
             DOMTodoModule.updateDisplay(todoDiv);
 
         });

@@ -4,6 +4,8 @@ const Todo = (title, description, dueDate, priority) => {
     
     const getTitle = () => title;
     const getDueDate = () => dueDate;
+    const getDescription = () => description;
+    const getPriority = () => priority;
     
     const addNote = (note) => {
         if (typeof note === 'string') {
@@ -14,7 +16,9 @@ const Todo = (title, description, dueDate, priority) => {
     return {
         getTitle, 
         addNote,
-        getDueDate
+        getDueDate,
+        getDescription,
+        getPriority
     };
 }
 

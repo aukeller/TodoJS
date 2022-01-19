@@ -1,6 +1,8 @@
 const Todo = (title, description, dueDate, priority) => {
     
     let notes;
+
+    
     
     const getTitle = () => title;
     const getDueDate = () => dueDate;

@@ -43,10 +43,13 @@ const main = () => {
     function createNewTodo() {
         const formValues = DOMTodoModule.getTodoFormValues();
         const newTodo = Todo(formValues.title, formValues.description, formValues.dueDate, formValues.priority);
+
+        const projectIndex = projects.map((e) => e.getTitle()).indexOf(focusedProject.getTitle());
+        console.log(projectIndex);
         
         focusedProject.addTodo(newTodo);
 
-        showTodos(focusedProject);
+        showTodos(focusedProject, projectIndex);
         DOMTodoModule.hideTodoForm();
 
     }
@@ -62,20 +65,62 @@ const main = () => {
         const project = projects[splitId];
 
 
-        showTodos(project);
+        showTodos(project, splitId);
         focusedProject = project;
     }
 
-    function showTodos(project) {
+    function showTodos(project, projectId) {
         DOMTodoModule.clearDisplay();
 
         const todos = project.getTodos();
 
-        todos.forEach((todo) => {
-            let todoDiv = DOMTodoModule.createBasicTodoDiv(todo.getTitle(), todo.getDueDate(), todo.getDescription(), todo.getPriority());            
+        todos.forEach((todo, index) => {
+            let todoDiv = DOMTodoModule.createBasicTodoDiv(todo.getTitle(), todo.getDueDate(), todo.getDescription(), todo.getPriority()); 
+            
+            let editBtn = todoDiv.childNodes[4].childNodes[1];
+            let deleteBtn = todoDiv.childNodes[4].childNodes[2];
+
+            console.log(deleteBtn);
+
+            todoDiv.id = `${projectId}-${index}`;           
+            
             DOMTodoModule.updateDisplay(todoDiv);
+            
+            editBtn.addEventListener('click', () => updateTodo(todoDiv.id));
+            deleteBtn.addEventListener('click', () => deleteTodo(todoDiv.id));
 
         });
+    }
+
+    function updateTodo(todoId) {
+        const saveBtn = DOMTodoModule.getSaveEditedTodoBtn();
+
+        const projectId = todoId.split('-')[0];
+        todoId = todoId.split('-')[1];
+
+        saveBtn.addEventListener('click', () => {
+            const newTitle = saveBtn.parentNode.childNodes[0].value;
+            const newDesc = saveBtn.parentNode.childNodes[1].value;
+            const newDueDate = saveBtn.parentNode.childNodes[2].value;
+            const newPriority = saveBtn.parentNode.childNodes[3].value;
+            
+   
+            let newTodo = Todo(newTitle, newDesc, newDueDate, newPriority);
+
+            projects[projectId].getTodos()[todoId] = newTodo;
+
+            showTodos(projects[projectId], projectId);
+        });
+
+    }
+
+    function deleteTodo(todoId) {
+        const projectId = todoId.split('-')[0];
+        todoId = todoId.split('-')[1];
+
+        projects[projectId].getTodos().splice(todoId, 1);
+
+        showTodos(projects[projectId], projectId);
     }
 
 

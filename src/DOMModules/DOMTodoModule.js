@@ -10,6 +10,7 @@ export default (function DOMTodoModule() {
     const priorityInput = document.querySelector('#priority');
     
     const createBasicTodoDiv = (todoTitle, todoDueDate, todoDescription, todoPriority) => {
+        
         let todoDIV = document.createElement('div');
 
         let title = document.createElement('h2');
@@ -40,32 +41,70 @@ export default (function DOMTodoModule() {
         let editBtn = document.createElement('button');
         let deleteBtn = document.createElement('button');
 
-        moreBtn.addEventListener('click', (e) => toggleTodoDetails(e, description, priority));
+        moreBtn.addEventListener('click', (e) => toggleTodoDetails(e, editBtn, description, priority));
         moreBtn.textContent = "more";
 
         editBtn.textContent = "edit";
         editBtn.hidden = true;
+        editBtn.addEventListener('click', (e) => editTodo(e.target.parentNode.parentNode));
         
         deleteBtn.textContent = "delete";
 
-        container.append(moreBtn, deleteBtn);
+        container.append(moreBtn, editBtn, deleteBtn);
 
         return container;
 
     };
 
-    const toggleTodoDetails = (e, description, priority) => {
+    const toggleTodoDetails = (e, editBtn, description, priority) => {
         if (e.target.textContent == "more") {
             description.hidden = false;
             priority.hidden = false;
+            editBtn.hidden = false;
+
             e.target.textContent = "hide";
         } else {
             description.hidden = true;
             priority.hidden = true;
+            editBtn.hidden = true;
+
             e.target.textContent = "more";
         }
 
     };
+
+    const editTodo = (todoDiv) => {
+        let childNodes = Array.from(todoDiv.childNodes);
+        
+        let titleInput = document.createElement('input');
+        titleInput.value = childNodes[0].textContent; 
+        
+        let descriptionInput = document.createElement('textarea');
+        descriptionInput.value = childNodes[2].textContent; 
+        
+        let dueDateInput = document.createElement('input');
+        dueDateInput.placeholder = "mm/dd/yyyy"
+
+        let priorityInput = document.createElement('select');
+        
+        let priorityHighOption = document.createElement('option');
+        let priorityMediumOption = document.createElement('option');
+        let priorityLowOption = document.createElement('option');
+
+        priorityHighOption.textContent = "high";
+        priorityMediumOption.textContent = "medium";
+        priorityLowOption.textContent = "low";
+
+        priorityInput.append(priorityHighOption, priorityMediumOption, priorityLowOption);
+
+        let saveBtn = document.createElement('button');
+        saveBtn.textContent = "save";
+        saveBtn.classList.add('save');
+
+        todoDiv.innerHTML = "";
+        todoDiv.append(titleInput, descriptionInput, dueDateInput, priorityInput, saveBtn);
+    };
+
 
     const updateDisplay = (todoDiv) => todosContainer.appendChild(todoDiv);
 
@@ -92,6 +131,7 @@ export default (function DOMTodoModule() {
 
 
     const getAddTodoBtn = () => document.querySelector('#add-todo');
+    const getSaveEditedTodoBtn = () => document.querySelector('.save')
     
     newTodoBtn.addEventListener('click', () => {
         displayNewTodoForm();
@@ -104,6 +144,8 @@ export default (function DOMTodoModule() {
         getAddTodoBtn,
         hideTodoForm,
         getTodoFormValues,
+        getSaveEditedTodoBtn,
+
     };
 
 })();

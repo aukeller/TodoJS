@@ -1,3 +1,5 @@
+import todoStyle from "./todostyle.css";
+
 export default (function DOMTodoModule() {
 
     const todosContainer = document.querySelector('#todos-container');

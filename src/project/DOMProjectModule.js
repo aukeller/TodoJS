@@ -1,3 +1,5 @@
+import projectStyle from "./projectstyle.css";
+
 export default (function DOMProjectModule() {
   
     const newProjectBtn = document.querySelector('#new-project');

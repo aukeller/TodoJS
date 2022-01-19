@@ -1,7 +1,7 @@
-import { Todo } from "./todos";
-import { Project } from "./project";
-import DOMProjectModule from "./DOMModules/DOMProjectModule";
-import DOMTodoModule from "./DOMModules/DOMTodoModule";
+import { Todo } from "./todo/todos";
+import { Project } from "./project/project";
+import DOMProjectModule from "./project/DOMProjectModule";
+import DOMTodoModule from "./todo/DOMTodoModule";
 
 import style from './style.css';
 

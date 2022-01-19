@@ -1,6 +1,36 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto-Regular.ttf');
+    font-weight: 200;
+}
+
 body {
+    font-family: "Roboto";
+    line-height: 1.6;
     margin: 0;
     height: 100vh;
+}
+
+header {
+    height: 10%;
+    display: flex;
+    align-items: center;
+
+    background-color: #add8e6;
+
+    padding-left: 50px;
+}
+
+header div {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    font-family: "Roboto";
+    font-size: 20px;
 }
 
 h2 {
@@ -14,7 +44,7 @@ h2 {
 
 #project-container, #main-todos-container {
     height: 100%;
-    border: 1px solid black;
+    
 }
 
 

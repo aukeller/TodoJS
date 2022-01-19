@@ -3,9 +3,16 @@
     padding: 25px;
     text-align: center;
     flex: 0.75;
+
+    background-color: #fafafa;
+    border-right: 1px solid #e3e3ee;
 }
 
 .project {
     font-size: 20px;
     margin-bottom: 10px;
+}
+
+#new-project, #project-form {
+    margin-bottom: 20px;
 }

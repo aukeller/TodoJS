@@ -1,5 +1,6 @@
 #main-todos-container {
     flex: 2;
+    background-color: #ffffff;
 }
 
 #todos-container {
@@ -8,6 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
 .todo {

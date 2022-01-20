@@ -32,6 +32,7 @@ const main = () => {
         let newProjectTitle = DOMProjectModule.getNewProjectTitle();
 
         projects.push(Project(newProjectTitle));
+        storage.saveProject(newProjectTitle);
         
         DOMProjectModule.updateProjectDisplay(newProjectTitle, `project-${projects.length - 1}`);
         DOMProjectModule.hideProjectForm();
@@ -47,6 +48,7 @@ const main = () => {
         const projectIndex = projects.map((e) => e.getTitle()).indexOf(focusedProject.getTitle());
         
         focusedProject.addTodo(newTodo);
+        storage.saveTodos(focusedProject.getTitle(), formValues.title, formValues.description, formValues.dueDate, formValues.priority);
 
         showTodos(focusedProject, projectIndex);
         DOMTodoModule.hideTodoForm();
@@ -134,6 +136,37 @@ const main = () => {
     showTodos(firstProject, 0);
 
 };
+
+const storage = (function() {
+    function saveProject(title) {
+        localStorage.setItem(title, JSON.stringify({}));
+    }
+
+    function saveTodos(project, todoTitle, desc, dueDate, priority) {
+        const storedProject = JSON.parse(localStorage.getItem(project));
+        storedProject[todoTitle] = {
+            todoTitle,
+            desc,
+            dueDate,
+            priority,
+        };
+
+        localStorage.setItem(project, JSON.stringify(storedProject));
+    }
+    
+    
+    return {
+        saveProject,
+        saveTodos,
+    };
+
+})(); 
+
+
+
+
+
+
 
 main();
 

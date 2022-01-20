@@ -16,3 +16,9 @@
 #new-project, #project-form {
     margin-bottom: 20px;
 }
+
+#add {
+    font-size: 16px;
+    padding: 0 10px;
+    background-color: green;
+}

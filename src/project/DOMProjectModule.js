@@ -1,8 +1,10 @@
 import projectStyle from "./projectstyle.css";
+import '@fortawesome/fontawesome-free/css/all.css';
 
 export default (function DOMProjectModule() {
   
     const newProjectBtn = document.querySelector('#new-project');
+    
     const projectForm = document.querySelector('#project-form');
     const projectTitleInput = document.querySelector('#project-title');
     

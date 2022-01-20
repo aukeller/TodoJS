@@ -1,4 +1,5 @@
 import todoStyle from "./todostyle.css";
+import {format} from 'date-fns';
 
 export default (function DOMTodoModule() {
 
@@ -25,7 +26,8 @@ export default (function DOMTodoModule() {
         
         
         title.textContent = todoTitle;
-        dueDate.textContent = `Due: ${todoDueDate}`;
+        
+        dueDate.textContent = `Due: ${formatDate(todoDueDate)}`;
         description.textContent = todoDescription;
         priority.textContent = todoPriority;
 
@@ -75,6 +77,11 @@ export default (function DOMTodoModule() {
 
     };
 
+    const formatDate = (date) => {
+        let splitDate = date.split('-');
+        return format(new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), parseInt(splitDate[2])), 'MM-dd-yyyy');
+    }
+
     const editTodo = (todoDiv) => {
         let childNodes = Array.from(todoDiv.childNodes);
         
@@ -85,7 +92,7 @@ export default (function DOMTodoModule() {
         descriptionInput.value = childNodes[2].textContent; 
         
         let dueDateInput = document.createElement('input');
-        dueDateInput.placeholder = "mm/dd/yyyy"
+        dueDateInput.setAttribute('type', 'date');
 
         let priorityInput = document.createElement('select');
         

@@ -8,7 +8,7 @@ import style from './style.css';
 const main = () => {
     
     let firstProject = Project('First Project');
-    let firstTodo = Todo('title', 'first todo', "1/13/22", 'high');
+    let firstTodo = Todo('title', 'first todo', "2022-01-01", 'high');
     firstProject.addTodo(firstTodo);
 
     const projects = [firstProject];
@@ -45,7 +45,6 @@ const main = () => {
         const newTodo = Todo(formValues.title, formValues.description, formValues.dueDate, formValues.priority);
 
         const projectIndex = projects.map((e) => e.getTitle()).indexOf(focusedProject.getTitle());
-        console.log(projectIndex);
         
         focusedProject.addTodo(newTodo);
 
@@ -80,7 +79,6 @@ const main = () => {
             let editBtn = todoDiv.childNodes[4].childNodes[1];
             let deleteBtn = todoDiv.childNodes[4].childNodes[2];
 
-            console.log(deleteBtn);
 
             todoDiv.id = `${projectId}-${index}`;           
             
@@ -133,6 +131,7 @@ const main = () => {
 
     DOMProjectModule.updateProjectDisplay(firstProject.getTitle(), `project-${projects.length - 1}`);
     addProjectListener(projects.length - 1);
+    showTodos(firstProject, 0);
 
 };
 

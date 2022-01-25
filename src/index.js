@@ -5,15 +5,15 @@ import DOMTodoModule from "./todo/DOMTodoModule";
 
 import style from './style.css';
 
-const main = () => {
+const main = (allProjects) => {    
+    const projects = [Project('First Project')];
     
-    let firstProject = Project('First Project');
-    let firstTodo = Todo('title', 'first todo', "2022-01-01", 'high');
-    firstProject.addTodo(firstTodo);
-
-    const projects = [firstProject];
-
-    let focusedProject = projects[0]; // project currently selected
+    if ((Object.keys(allProjects)).length > 0) {
+        const projectsFromStorage = createFromStorage(allProjects);    
+        projects.push(...projectsFromStorage);
+    }
+    
+    let focusedProject = projects[0]; 
 
 
     function readyProjectForm() {
@@ -41,14 +41,32 @@ const main = () => {
         addProjectListener(projects.length - 1);
     }
 
+    function createFromStorage(projects) {
+        const storageProjects = [];
+
+        Object.keys(projects).forEach(key => {
+            const projectFromStorage = Project(key);
+
+            JSON.parse(projects[key]).forEach(todo => {
+                const todoFromStorage = Todo(...todo);
+                projectFromStorage.addTodo(todoFromStorage);
+            });
+            storageProjects.push(projectFromStorage);
+        });
+        
+
+        return storageProjects;
+    }
+
     function createNewTodo() {
         const formValues = DOMTodoModule.getTodoFormValues();
-        const newTodo = Todo(formValues.title, formValues.description, formValues.dueDate, formValues.priority);
+        const newTodo = Todo(...formValues);
 
         const projectIndex = projects.map((e) => e.getTitle()).indexOf(focusedProject.getTitle());
         
         focusedProject.addTodo(newTodo);
-        storage.saveTodos(focusedProject.getTitle(), formValues.title, formValues.description, formValues.dueDate, formValues.priority);
+        
+        storage.saveTodo(focusedProject.getTitle(), ...formValues);
 
         showTodos(focusedProject, projectIndex);
         DOMTodoModule.hideTodoForm();
@@ -131,42 +149,44 @@ const main = () => {
     newTodoBtn.addEventListener('click', readyTodoForm);
     
 
-    DOMProjectModule.updateProjectDisplay(firstProject.getTitle(), `project-${projects.length - 1}`);
-    addProjectListener(projects.length - 1);
-    showTodos(firstProject, 0);
+    projects.forEach((project, index) => {
+        DOMProjectModule.updateProjectDisplay(project.getTitle(), `project-${index}`);
+        addProjectListener(index);
+    })
+    
+    showTodos(focusedProject, 0);
+    
 
 };
 
 const storage = (function() {
     function saveProject(title) {
-        localStorage.setItem(title, JSON.stringify({}));
+        localStorage.setItem(title, JSON.stringify([]));
     }
 
-    function saveTodos(project, todoTitle, desc, dueDate, priority) {
+    function saveTodo(project, todoTitle, todoDesc, todoDueDate, todoPriority) {
         const storedProject = JSON.parse(localStorage.getItem(project));
-        storedProject[todoTitle] = {
-            todoTitle,
-            desc,
-            dueDate,
-            priority,
-        };
+
+        storedProject.push([todoTitle, todoDesc, todoDueDate, todoPriority]);
 
         localStorage.setItem(project, JSON.stringify(storedProject));
     }
-    
-    
+
+    function deserializeProjects(allProjects) {
+        Object.keys(allProjects).forEach(key => {
+            JSON.parse(allProjects[key]);
+        });
+
+        return allProjects;
+    }
+
     return {
         saveProject,
-        saveTodos,
+        saveTodo,
+        deserializeProjects,
     };
 
 })(); 
 
-
-
-
-
-
-
-main();
+main(storage.deserializeProjects({...localStorage}));
 

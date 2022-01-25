@@ -129,14 +129,12 @@ export default (function DOMTodoModule() {
         priorityInput.value = "";
     };
 
-    const getTodoFormValues = () => {
-        return {
-            title: todoForm.elements[0].value,
-            description: todoForm.elements[1].value,
-            dueDate: todoForm.elements[2].value,
-            priority: todoForm.elements[3].value,
-        };
-    }
+    const getTodoFormValues = () => [todoForm.elements[0].value, 
+                                     todoForm.elements[1].value, 
+                                     todoForm.elements[2].value, 
+                                     todoForm.elements[3].value];
+        
+    
 
 
     const getAddTodoBtn = () => document.querySelector('#add-todo');

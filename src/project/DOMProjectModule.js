@@ -11,7 +11,7 @@ export default (function DOMProjectModule() {
     const updateProjectDisplay = (title, id) => {
         const projectContainer = document.querySelector('#project-container');
 
-        const projectDIV = document.createElement('div');
+        const projectDIV = document.createElement('button');
         projectDIV.textContent = title;
         projectDIV.classList.add('project');
         projectDIV.id = id;
